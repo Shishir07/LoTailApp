@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'eclipse'  
+apply plugin: 'application'
 
 configurations {
     provided
@@ -46,5 +47,6 @@ dependencies {
 task wrapper(type: Wrapper) {
    gradleVersion = '2.0' //version required
 }
-task stage(dependsOn: ['wrapper'])
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
