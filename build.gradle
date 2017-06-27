@@ -43,7 +43,6 @@ dependencies {
     compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.3.3'
     compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-json-provider', version:'2.3.3'
     providedCompile group: 'javax.websocket', name: 'javax.websocket-api', version:'1.0'
-    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
     compile 'log4j:log4j:1.2.17'
 	compile 'org.slf4j:slf4j-api:1.7.5'
 	compile 'org.slf4j:slf4j-log4j12:1.7.5'
@@ -52,18 +51,6 @@ dependencies {
 task wrapper(type: Wrapper) {
    gradleVersion = '2.0' //version required
 }
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
 
-
-task stage() {
-    dependsOn clean, war
-}
-war.mustRunAfter clean
-
-task copyToLib(type: Copy) {
-    into "$buildDir/server"
-    from(configurations.compile) {
-        include "webapp-runner*"
-    }
-}
-
-stage.dependsOn(copyToLib)
