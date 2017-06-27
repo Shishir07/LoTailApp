@@ -1,1 +1,1 @@
-web: java -war target/CoverfoxlogListing-1.0.0.war
+web: java -jar target/CoverfoxlogListing-1.0.0.war
